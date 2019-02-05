@@ -1,0 +1,1828 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Writing a Custom Local Authenticator - WSO2 Identity Server Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546e7a">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700|Courier+New">
+        <style>body,input{font-family:"Nunito Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier New","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#writing-a-custom-local-authenticator" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="WSO2 Identity Server Documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../images/WSO2_Software_Logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                WSO2 Identity Server Documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Writing a Custom Local Authenticator
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/sherenewso2/mkdocs-base/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      View on Github
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../GettingStarted/Overview/" title="Getting Started" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Concepts/Single_Sign-On_and_Identity_Federation/" title="Concepts" class="md-tabs__link">
+          Concepts
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Troubleshooting/" title="How Tos" class="md-tabs__link">
+          How Tos
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../user_mgt/Writing_a_Custom_Password_Validator/" title="Develop" class="md-tabs__link">
+          Develop
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Getting_Started/" title="Admin" class="md-tabs__link">
+          Admin
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Getting_Started/" title="Deploy" class="md-tabs__link">
+          Deploy
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Getting_Started/" title="Troubleshooting" class="md-tabs__link">
+          Troubleshooting
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Getting_Started/" title="References" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Getting_Started/" title="Community" class="md-tabs__link">
+          Community
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!-- Main navigation -->
+<nav class="md-nav md-nav--primary" data-md-level="0">
+
+    <!-- Site title -->
+    <label class="md-nav__title md-nav__title--site" for="__drawer">
+        <a href="../../.."
+           title="WSO2 Identity Server Documentation" class="md-nav__button md-logo">
+            
+            <img src="../../../images/WSO2_Software_Logo.png" width="48" height="48" />
+            
+        </a>
+        WSO2 Identity Server Documentation
+        <label for="Versions">Ver:
+            <select id="versions" onchange="window.location.href=this.value;" style="
+		position: inherit;
+		display: inline;
+		min-width: 25%;
+		/* width: 120%; */
+		height: 25px;
+		padding: 5px 15px 5px 5px;
+		color: Black;
+		border: none;
+		background: transparent;
+		outline: none;
+		-webkit-appearance: none;
+		z-index: 99;
+		cursor: pointer;
+		font-size: 12px;
+		margin-bottom: 10px;
+		border: 1px solid black;
+		overflow: auto
+	">
+                <option value="" selected="selected">Versions</option>
+ 		<option value="https://Kanapriya.github.io/mkdocs-base-1/versions/IS/IS530/5.3.0/">5.3.0</option>
+                <option value="https://Kanapriya.github.io/mkdocs-base-1/versions/IS/IS540/5.4.0/">5.4.0</option>
+                <option value="https://Kanapriya.github.io/mkdocs-base-1/versions/IS/IS550/5.5.0/">5.5.0</option>
+            </select>
+        </label>
+    </label>
+    <!-- Repository containing source -->
+    
+    <div class="md-nav__source">
+        
+
+
+  
+
+
+  <a href="https://github.com/sherenewso2/mkdocs-base/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      View on Github
+    </div>
+  </a>
+
+    </div>
+    
+
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Getting Started
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../GettingStarted/Overview/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../GettingStarted/About_this_Release/" title="About this release" class="md-nav__link">
+      About this release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../GettingStarted/QSG/" title="Quick Start" class="md-nav__link">
+      Quick Start
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Concepts
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Concepts/Single_Sign-On_and_Identity_Federation/" title="Single Sign-On and Identity Federation" class="md-nav__link">
+      Single Sign-On and Identity Federation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Concepts/Identity_Provisioning_and_its_Standards/" title="Identity_Provisioning and its Standards" class="md-nav__link">
+      Identity_Provisioning and its Standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Concepts/Access_Control_and_Entitlement_Management/" title="Access_Control and Entitlement Management" class="md-nav__link">
+      Access_Control and Entitlement Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Concepts/Identity_Anti-patterns_and_the_Identity_Bus/" title="Identity Anti-patterns and the Identity Bus" class="md-nav__link">
+      Identity Anti-patterns and the Identity Bus
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How Tos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How Tos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Troubleshooting/" title="Troubleshooting Guide" class="md-nav__link">
+      Troubleshooting Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Best Practices Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Best Practices Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../BestPracticesGuide/" title="Best Practices Guide" class="md-nav__link">
+      Best Practices Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Developer_Guide/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Developer Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Developer Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3-1" type="checkbox" id="nav-3-3-1">
+    
+    <label class="md-nav__link" for="nav-3-3-1">
+      Testing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-3-1">
+        Testing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../WUM_Commands_Guide/" title="WUM Commands Guide" class="md-nav__link">
+      WUM Commands Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3-2" type="checkbox" id="nav-3-3-2">
+    
+    <label class="md-nav__link" for="nav-3-3-2">
+      Another subpage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-3-2">
+        Another subpage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Developer_Guide/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Develop
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Develop
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      User Management for Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        User Management for Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_mgt/Writing_a_Custom_Password_Validator/" title="Writing a Custom Password Validator" class="md-nav__link">
+      Writing a Custom Password Validator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_mgt/Writing_a_Custom_Claim_Handler/" title="Writing a Custom Claim Handler" class="md-nav__link">
+      Writing a Custom Claim Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_mgt/User_Store_Listeners/" title="User Store Listeners" class="md-nav__link">
+      User Store Listeners
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_mgt/Using_the_User_Management_Errors_Event_Listener/" title="Using the User Management Errors Event Listener" class="md-nav__link">
+      Using the User Management Errors Event Listener
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_mgt/Carbon_Remote_User_Store_Manager/" title="Carbon Remote User Store Manager" class="md-nav__link">
+      Carbon Remote User Store Manager
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Provisioning for Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Provisioning for Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../provision/Writing_an_Outbound_Provisioning_Connector/" title="Writing an Outbound Provisioning Connector" class="md-nav__link">
+      Writing an Outbound Provisioning Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../provision/Extensible_SCIM_User_Schemas_With_WSO2_Identity_Server/" title="Extensible SCIM User Schemas With WSO2 Identity Server" class="md-nav__link">
+      Extensible SCIM User Schemas With WSO2 Identity Server
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Identity Federation for Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Identity Federation for Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Writing_a_Custom_Federated_Authenticator/" title="Writing a Custom Federated Authenticator" class="md-nav__link">
+      Writing a Custom Federated Authenticator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Writing a Custom Local Authenticator
+      </label>
+    
+    <a href="./" title="Writing a Custom Local Authenticator" class="md-nav__link md-nav__link--active">
+      Writing a Custom Local Authenticator
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attachments" title="Attachments:" class="md-nav__link">
+    Attachments:
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Admin
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Admin
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Deploy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Deploy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Troubleshooting
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Troubleshooting
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      References
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Community
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Community
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attachments" title="Attachments:" class="md-nav__link">
+    Attachments:
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sherenewso2/mkdocs-base/edit/master/docs/Develop/federate/Writing_a_Custom_Local_Authenticator.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="writing-a-custom-local-authenticator">Writing a Custom Local Authenticator</h1>
+<p>Default authenticator of WSO2 Identity Server, is the basic
+authenticator and it is also a local authenticator which authenticates
+the end user with connected user store using provided username and
+password. If a user needs to be authenticated with the user store and
+authorized based on a specific assigned role, you can write a custom
+local authenticator. Let's take following sample requirement. </p>
+<p>You have an app called ‘playground’ that is used for importing/exporting
+photos. This app uses OpenID Connect to let the users log into it.
+During login, only the users who belong to the user role called
+'photoSharingRole' should be allowed to be logged in. In other words,
+the users with other roles should not be able to log into the playground
+app.</p>
+<p>To facilitate the above requirement, WSO2 Identity Server provides
+extension points that has the ability to plug custom local
+authenticators. </p>
+<p>The following steps explain how you can write a custom local
+authenticator by extending the AbstractApplicationAuthenticator class
+and implementing the LocalApplicationAuthenticator class and how to this
+custom local authenticator can be plugged in to these extension points.
+Now let's begin.</p>
+<ol>
+<li>
+<p>Create a maven project to write the custom
+    authenticator. (<code class="codehilite">pom.xml</code> example is given below)</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="c">&lt;!--</span>
+<span class="c"> ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.</span>
+<span class="c"> ~</span>
+<span class="c"> ~ Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c"> ~ you may not use this file except in compliance with the License.</span>
+<span class="c"> ~ You may obtain a copy of the License at</span>
+<span class="c"> ~</span>
+<span class="c"> ~      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c"> ~</span>
+<span class="c"> ~ Unless required by applicable law or agreed to in writing, software</span>
+<span class="c"> ~ distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c"> ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+
+
+<span class="c"> ~ See the License for the specific language governing permissions and</span>
+<span class="c"> ~ limitations under the License.</span>
+<span class="c"> --&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+
+   <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+   <span class="nt">&lt;groupId&gt;</span>org.wso2.custom.authenticator<span class="nt">&lt;/groupId&gt;</span>
+   <span class="nt">&lt;artifactId&gt;</span>org.wso2.custom.authenticator.local<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;packaging&gt;</span>bundle<span class="nt">&lt;/packaging&gt;</span>
+   <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+   <span class="nt">&lt;name&gt;</span>WSO2 Carbon - BasicAuth Custom Authenticator<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;dependencies&gt;</span>
+       <span class="nt">&lt;dependency&gt;</span>
+           <span class="nt">&lt;groupId&gt;</span>org.wso2.carbon<span class="nt">&lt;/groupId&gt;</span>
+           <span class="nt">&lt;artifactId&gt;</span>org.wso2.carbon.utils<span class="nt">&lt;/artifactId&gt;</span>
+           <span class="nt">&lt;version&gt;</span>4.4.11<span class="nt">&lt;/version&gt;</span>
+       <span class="nt">&lt;/dependency&gt;</span>
+       <span class="nt">&lt;dependency&gt;</span>
+           <span class="nt">&lt;groupId&gt;</span>org.wso2.carbon<span class="nt">&lt;/groupId&gt;</span>
+           <span class="nt">&lt;artifactId&gt;</span>org.wso2.carbon.logging<span class="nt">&lt;/artifactId&gt;</span>
+           <span class="nt">&lt;version&gt;</span>4.4.11<span class="nt">&lt;/version&gt;</span>
+       <span class="nt">&lt;/dependency&gt;</span>
+       <span class="nt">&lt;dependency&gt;</span>
+           <span class="nt">&lt;groupId&gt;</span>org.wso2.carbon.identity.framework<span class="nt">&lt;/groupId&gt;</span>
+           <span class="nt">&lt;artifactId&gt;</span>org.wso2.carbon.identity.application.authentication.framework<span class="nt">&lt;/artifactId&gt;</span>
+           <span class="nt">&lt;version&gt;</span>5.7.5<span class="nt">&lt;/version&gt;</span>
+       <span class="nt">&lt;/dependency&gt;</span>
+   <span class="nt">&lt;/dependencies&gt;</span>
+   <span class="nt">&lt;build&gt;</span>
+       <span class="nt">&lt;plugins&gt;</span>
+           <span class="nt">&lt;plugin&gt;</span>
+               <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+               <span class="nt">&lt;version&gt;</span>2.3.1<span class="nt">&lt;/version&gt;</span>
+               <span class="nt">&lt;inherited&gt;</span>true<span class="nt">&lt;/inherited&gt;</span>
+               <span class="nt">&lt;configuration&gt;</span>
+                   <span class="nt">&lt;encoding&gt;</span>UTF-8<span class="nt">&lt;/encoding&gt;</span>
+                   <span class="nt">&lt;source&gt;</span>1.7<span class="nt">&lt;/source&gt;</span>
+                   <span class="nt">&lt;target&gt;</span>1.7<span class="nt">&lt;/target&gt;</span>
+               <span class="nt">&lt;/configuration&gt;</span>
+           <span class="nt">&lt;/plugin&gt;</span>
+           <span class="nt">&lt;plugin&gt;</span>
+               <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
+               <span class="nt">&lt;artifactId&gt;</span>maven-scr-plugin<span class="nt">&lt;/artifactId&gt;</span>
+               <span class="nt">&lt;version&gt;</span>1.7.2<span class="nt">&lt;/version&gt;</span>
+               <span class="nt">&lt;executions&gt;</span>
+                   <span class="nt">&lt;execution&gt;</span>
+                       <span class="nt">&lt;id&gt;</span>generate-scr-scrdescriptor<span class="nt">&lt;/id&gt;</span>
+                       <span class="nt">&lt;goals&gt;</span>
+                           <span class="nt">&lt;goal&gt;</span>scr<span class="nt">&lt;/goal&gt;</span>
+                       <span class="nt">&lt;/goals&gt;</span>
+                   <span class="nt">&lt;/execution&gt;</span>
+               <span class="nt">&lt;/executions&gt;</span>
+           <span class="nt">&lt;/plugin&gt;</span>
+           <span class="nt">&lt;plugin&gt;</span>
+               <span class="nt">&lt;groupId&gt;</span>org.apache.felix<span class="nt">&lt;/groupId&gt;</span>
+               <span class="nt">&lt;artifactId&gt;</span>maven-bundle-plugin<span class="nt">&lt;/artifactId&gt;</span>
+
+
+    <span class="nt">&lt;version&gt;</span>2.3.5<span class="nt">&lt;/version&gt;</span>
+               <span class="nt">&lt;extensions&gt;</span>true<span class="nt">&lt;/extensions&gt;</span>
+               <span class="nt">&lt;configuration&gt;</span>
+                   <span class="nt">&lt;instructions&gt;</span>
+                       <span class="nt">&lt;Bundle-SymbolicName&gt;</span>${project.artifactId}<span class="nt">&lt;/Bundle-SymbolicName&gt;</span>
+                       <span class="nt">&lt;Bundle-Name&gt;</span>${project.artifactId}<span class="nt">&lt;/Bundle-Name&gt;</span>
+                       <span class="nt">&lt;Axis2Module&gt;</span>${project.artifactId}-${project.version}<span class="nt">&lt;/Axis2Module&gt;</span>
+                       <span class="nt">&lt;Import-Package&gt;</span>
+                           javax.servlet,
+                           javax.servlet.http,
+                           *;resolution:=optional
+                       <span class="nt">&lt;/Import-Package&gt;</span>
+                       <span class="nt">&lt;Private-Package&gt;</span>
+                           org.wso2.custom.authenticator.local.internal,
+                       <span class="nt">&lt;/Private-Package&gt;</span>
+                       <span class="nt">&lt;Export-Package&gt;</span>
+                           !org.wso2.custom.authenticator.local.internal,
+                           org.wso2.custom.authenticator.local.*;
+                           version=&quot;1.0.0&quot;
+                       <span class="nt">&lt;/Export-Package&gt;</span>
+                   <span class="nt">&lt;/instructions&gt;</span>
+               <span class="nt">&lt;/configuration&gt;</span>
+           <span class="nt">&lt;/plugin&gt;</span>
+       <span class="nt">&lt;/plugins&gt;</span>
+   <span class="nt">&lt;/build&gt;</span>
+
+   <span class="nt">&lt;repositories&gt;</span>
+       <span class="nt">&lt;repository&gt;</span>
+           <span class="nt">&lt;id&gt;</span>wso2-nexus<span class="nt">&lt;/id&gt;</span>
+           <span class="nt">&lt;name&gt;</span>WSO2 internal Repository<span class="nt">&lt;/name&gt;</span>
+           <span class="nt">&lt;url&gt;</span>http://maven.wso2.org/nexus/content/groups/wso2-public/<span class="nt">&lt;/url&gt;</span>
+           <span class="nt">&lt;releases&gt;</span>
+               <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+               <span class="nt">&lt;updatePolicy&gt;</span>daily<span class="nt">&lt;/updatePolicy&gt;</span>
+               <span class="nt">&lt;checksumPolicy&gt;</span>ignore<span class="nt">&lt;/checksumPolicy&gt;</span>
+           <span class="nt">&lt;/releases&gt;</span>
+       <span class="nt">&lt;/repository&gt;</span>
+   <span class="nt">&lt;/repositories&gt;</span>
+
+   <span class="nt">&lt;pluginRepositories&gt;</span>
+       <span class="nt">&lt;pluginRepository&gt;</span>
+           <span class="nt">&lt;id&gt;</span>wso2-maven2-repository<span class="nt">&lt;/id&gt;</span>
+           <span class="nt">&lt;url&gt;</span>http://dist.wso2.org/maven2<span class="nt">&lt;/url&gt;</span>
+       <span class="nt">&lt;/pluginRepository&gt;</span>
+   <span class="nt">&lt;/pluginRepositories&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+
+</li>
+<li>
+<p>Write a custom local authenticator.</p>
+<p>The <code class="codehilite">BasicCustomAuthenticatorConsta</code>nts.java file that is referred
+in the below example is available here. You dont need to write this
+from scratch.</p>
+<p><strong>Sample custom authenticator class</strong></p>
+<div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm">* Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.</span>
+<span class="cm">*</span>
+<span class="cm">* WSO2 Inc. licenses this file to you under the Apache License,</span>
+<span class="cm">* Version 2.0 (the &quot;License&quot;); you may not use this file except</span>
+<span class="cm">* in compliance with the License.</span>
+<span class="cm">* You may obtain a copy of the License at</span>
+<span class="cm">*</span>
+<span class="cm">*      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">*</span>
+<span class="cm">* Unless required by applicable law or agreed to in writing,</span>
+<span class="cm">* software distributed under the License is distributed on an</span>
+<span class="cm">* &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
+<span class="cm">* KIND, either express or implied.  See the License for the</span>
+<span class="cm">* specific language governing permissions and limitations</span>
+<span class="cm">* under the License.</span>
+<span class="cm">*/</span>
+<span class="kn">package</span> <span class="nn">org.wso2.custom.authenticator.local</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.commons.logging.Log</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.commons.logging.LogFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.common.model.User</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.core.util.IdentityUtil</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.custom.authenticator.local.internal.BasicCustomAuthenticatorServiceComponent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.AbstractApplicationAuthenticator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.LocalApplicationAuthenticator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.config.ConfigurationFacade</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.context.AuthenticationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.exception.AuthenticationFailedException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.exception.InvalidCredentialsException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.model.AuthenticatedUser</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.util.FrameworkUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.user.core.UserStoreException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.user.core.UserStoreManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.user.core.common.AbstractUserStoreManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.utils.multitenancy.MultitenantUtils</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Username Password based custom Authenticator</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BasicCustomAuthenticator</span> <span class="kd">extends</span> <span class="n">AbstractApplicationAuthenticator</span> <span class="kd">implements</span> <span class="n">LocalApplicationAuthenticator</span> <span class="o">{</span>
+
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">4345354156955223654L</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Log</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LogFactory</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">BasicCustomAuthenticator</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+
+   <span class="nd">@Override</span>
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initiateAuthenticationRequest</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
+                                                <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span>
+                                                <span class="n">AuthenticationContext</span> <span class="n">context</span><span class="o">)</span>
+           <span class="kd">throws</span> <span class="n">AuthenticationFailedException</span> <span class="o">{</span>
+
+       <span class="n">String</span> <span class="n">loginPage</span> <span class="o">=</span> <span class="n">ConfigurationFacade</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getAuthenticationEndpointURL</span><span class="o">();</span><span class="c1">//This is the</span>
+       <span class="c1">// default WSO2 IS login page. If you can create your custom login page you can use</span>
+       <span class="c1">// that instead.</span>
+       <span class="n">String</span> <span class="n">queryParams</span> <span class="o">=</span>
+               <span class="n">FrameworkUtils</span><span class="o">.</span><span class="na">getQueryStringWithFrameworkContextId</span><span class="o">(</span><span class="n">context</span><span class="o">.</span><span class="na">getQueryParams</span><span class="o">(),</span>
+                       <span class="n">context</span><span class="o">.</span><span class="na">getCallerSessionKey</span><span class="o">(),</span>
+                       <span class="n">context</span><span class="o">.</span><span class="na">getContextIdentifier</span><span class="o">());</span>
+
+       <span class="k">try</span> <span class="o">{</span>
+           <span class="n">String</span> <span class="n">retryParam</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+
+           <span class="k">if</span> <span class="o">(</span><span class="n">context</span><span class="o">.</span><span class="na">isRetrying</span><span class="o">())</span> <span class="o">{</span>
+               <span class="n">retryParam</span> <span class="o">=</span> <span class="s">&quot;&amp;authFailure=true&amp;authFailureMsg=login.fail.message&quot;</span><span class="o">;</span>
+           <span class="o">}</span>
+
+           <span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">encodeRedirectURL</span><span class="o">(</span><span class="n">loginPage</span> <span class="o">+</span> <span class="o">(</span><span class="s">&quot;?&quot;</span> <span class="o">+</span> <span class="n">queryParams</span><span class="o">))</span> <span class="o">+</span>
+                   <span class="s">&quot;&amp;authenticators=BasicAuthenticator:&quot;</span> <span class="o">+</span> <span class="s">&quot;LOCAL&quot;</span> <span class="o">+</span> <span class="n">retryParam</span><span class="o">);</span>
+       <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">throw</span> <span class="k">new</span> <span class="n">AuthenticationFailedException</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="cm">/**</span>
+<span class="cm">    * This method is used to process the authentication response.</span>
+<span class="cm">    * Inside here we check if this is a authentication request coming from oidc flow and then check if the user is</span>
+<span class="cm">    * in the &#39;photoSharingRole&#39;.</span>
+<span class="cm">    */</span>
+   <span class="nd">@Override</span>
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">processAuthenticationResponse</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
+                                                <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">AuthenticationContext</span> <span class="n">context</span><span class="o">)</span>
+           <span class="kd">throws</span> <span class="n">AuthenticationFailedException</span> <span class="o">{</span>
+
+       <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="n">BasicCustomAuthenticatorConstants</span><span class="o">.</span><span class="na">USER_NAME</span><span class="o">);</span>
+       <span class="kt">boolean</span> <span class="n">isAuthenticated</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+       <span class="n">context</span><span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="n">AuthenticatedUser</span><span class="o">.</span><span class="na">createLocalAuthenticatedUserFromSubjectIdentifier</span><span class="o">(</span><span class="n">username</span><span class="o">));</span>
+       <span class="kt">boolean</span> <span class="n">authorization</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+       <span class="k">if</span><span class="o">(</span><span class="n">isAuthenticated</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">if</span> <span class="o">(</span><span class="s">&quot;oidc&quot;</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">context</span><span class="o">.</span><span class="na">getRequestType</span><span class="o">()))</span> <span class="o">{</span>
+               <span class="c1">// authorization only for openid connect requests</span>
+               <span class="k">try</span> <span class="o">{</span>
+                   <span class="kt">int</span> <span class="n">tenantId</span> <span class="o">=</span> <span class="n">BasicCustomAuthenticatorServiceComponent</span><span class="o">.</span><span class="na">getRealmService</span><span class="o">().</span><span class="na">getTenantManager</span><span class="o">().</span>
+                           <span class="n">getTenantId</span><span class="o">(</span><span class="n">MultitenantUtils</span><span class="o">.</span><span class="na">getTenantDomain</span><span class="o">(</span><span class="n">username</span><span class="o">));</span>
+                   <span class="n">UserStoreManager</span> <span class="n">userStoreManager</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserStoreManager</span><span class="o">)</span> <span class="n">BasicCustomAuthenticatorServiceComponent</span><span class="o">.</span><span class="na">getRealmService</span><span class="o">().</span>
+                           <span class="n">getTenantUserRealm</span><span class="o">(</span><span class="n">tenantId</span><span class="o">).</span><span class="na">getUserStoreManager</span><span class="o">();</span>
+
+                   <span class="c1">// verify user is assigned to role</span>
+                   <span class="n">authorization</span> <span class="o">=</span> <span class="o">((</span><span class="n">AbstractUserStoreManager</span><span class="o">)</span> <span class="n">userStoreManager</span><span class="o">).</span><span class="na">isUserInRole</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="s">&quot;photoSharingRole&quot;</span><span class="o">);</span>
+               <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">UserStoreException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                   <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+               <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">org</span><span class="o">.</span><span class="na">wso2</span><span class="o">.</span><span class="na">carbon</span><span class="o">.</span><span class="na">user</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">UserStoreException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                   <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+               <span class="o">}</span>
+           <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+               <span class="c1">// others scenarios are not verified.</span>
+               <span class="n">authorization</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+           <span class="o">}</span>
+
+           <span class="k">if</span> <span class="o">(!</span><span class="n">authorization</span><span class="o">)</span> <span class="o">{</span>
+               <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;user authorization is failed.&quot;</span><span class="o">);</span>
+
+               <span class="k">throw</span> <span class="k">new</span> <span class="n">InvalidCredentialsException</span><span class="o">(</span><span class="s">&quot;User authentication failed due to invalid credentials&quot;</span><span class="o">,</span>
+                       <span class="n">User</span><span class="o">.</span><span class="na">getUserFromUserName</span><span class="o">(</span><span class="n">username</span><span class="o">));</span>
+
+           <span class="o">}</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">retryAuthenticationEnabled</span><span class="o">()</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFriendlyName</span><span class="o">()</span> <span class="o">{</span>
+       <span class="c1">//Set the name to be displayed in local authenticator drop down lsit</span>
+       <span class="k">return</span> <span class="n">BasicCustomAuthenticatorConstants</span><span class="o">.</span><span class="na">AUTHENTICATOR_FRIENDLY_NAME</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canHandle</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">httpServletRequest</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">String</span> <span class="n">userName</span> <span class="o">=</span> <span class="n">httpServletRequest</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="n">BasicCustomAuthenticatorConstants</span><span class="o">.</span><span class="na">USER_NAME</span><span class="o">);</span>
+       <span class="n">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">httpServletRequest</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="n">BasicCustomAuthenticatorConstants</span><span class="o">.</span><span class="na">PASSWORD</span><span class="o">);</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">userName</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">password</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+       <span class="o">}</span>
+       <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getContextIdentifier</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">httpServletRequest</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="n">httpServletRequest</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">&quot;sessionDataKey&quot;</span><span class="o">);</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="n">BasicCustomAuthenticatorConstants</span><span class="o">.</span><span class="na">AUTHENTICATOR_NAME</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+</li>
+<li>
+<p>Write a osgi service component class to register the custom
+    authenticator.</p>
+<div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm">* Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.</span>
+<span class="cm">*</span>
+<span class="cm">* WSO2 Inc. licenses this file to you under the Apache License,</span>
+<span class="cm">* Version 2.0 (the &quot;License&quot;); you may not use this file except</span>
+<span class="cm">* in compliance with the License.</span>
+<span class="cm">* You may obtain a copy of the License at</span>
+<span class="cm">*</span>
+<span class="cm">*      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">*</span>
+<span class="cm">* Unless required by applicable law or agreed to in writing,</span>
+<span class="cm">* software distributed under the License is distributed on an</span>
+<span class="cm">* &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
+<span class="cm">* KIND, either express or implied.  See the License for the</span>
+<span class="cm">* specific language governing permissions and limitations</span>
+<span class="cm">* under the License.</span>
+<span class="cm">*/</span>
+<span class="kn">package</span> <span class="nn">org.wso2.custom.authenticator.local.internal</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.commons.logging.Log</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.commons.logging.LogFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.osgi.service.component.ComponentContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.custom.authenticator.local.BasicCustomAuthenticator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.identity.application.authentication.framework.ApplicationAuthenticator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.wso2.carbon.user.core.service.RealmService</span><span class="o">;</span>
+
+
+<span class="cm">/**</span>
+<span class="cm">* @scr.component name=&quot;org.wso2.custom.authenticator.local.basic.component&quot; immediate=&quot;true&quot;</span>
+<span class="cm">* @scr.reference name=&quot;realm.service&quot;</span>
+<span class="cm">* interface=&quot;org.wso2.carbon.user.core.service.RealmService&quot;cardinality=&quot;1..1&quot;</span>
+<span class="cm">* policy=&quot;dynamic&quot; bind=&quot;setRealmService&quot; unbind=&quot;unsetRealmService&quot;</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BasicCustomAuthenticatorServiceComponent</span> <span class="o">{</span>
+
+   <span class="kd">private</span> <span class="kd">static</span> <span class="n">Log</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LogFactory</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">BasicCustomAuthenticatorServiceComponent</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+   <span class="kd">private</span> <span class="kd">static</span> <span class="n">RealmService</span> <span class="n">realmService</span><span class="o">;</span>
+
+   <span class="kd">public</span> <span class="kd">static</span> <span class="n">RealmService</span> <span class="nf">getRealmService</span><span class="o">()</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="n">realmService</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">activate</span><span class="o">(</span><span class="n">ComponentContext</span> <span class="n">ctxt</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">try</span> <span class="o">{</span>
+           <span class="n">BasicCustomAuthenticator</span> <span class="n">basicCustomAuth</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicCustomAuthenticator</span><span class="o">();</span>
+           <span class="n">ctxt</span><span class="o">.</span><span class="na">getBundleContext</span><span class="o">().</span><span class="na">registerService</span><span class="o">(</span><span class="n">ApplicationAuthenticator</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">basicCustomAuth</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+           <span class="k">if</span> <span class="o">(</span><span class="n">log</span><span class="o">.</span><span class="na">isDebugEnabled</span><span class="o">())</span> <span class="o">{</span>
+               <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;BasicCustomAuthenticator bundle is activated&quot;</span><span class="o">);</span>
+           <span class="o">}</span>
+       <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+           <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;BasicCustomAuthenticator bundle activation Failed&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">deactivate</span><span class="o">(</span><span class="n">ComponentContext</span> <span class="n">ctxt</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">log</span><span class="o">.</span><span class="na">isDebugEnabled</span><span class="o">())</span> <span class="o">{</span>
+           <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;BasicCustomAuthenticator bundle is deactivated&quot;</span><span class="o">);</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">unsetRealmService</span><span class="o">(</span><span class="n">RealmService</span> <span class="n">realmService</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">&quot;UnSetting the Realm Service&quot;</span><span class="o">);</span>
+       <span class="n">BasicCustomAuthenticatorServiceComponent</span><span class="o">.</span><span class="na">realmService</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setRealmService</span><span class="o">(</span><span class="n">RealmService</span> <span class="n">realmService</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">&quot;Setting the Realm Service&quot;</span><span class="o">);</span>
+       <span class="n">BasicCustomAuthenticatorServiceComponent</span><span class="o">.</span><span class="na">realmService</span> <span class="o">=</span> <span class="n">realmService</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+</li>
+<li>
+<p>Build the project using maven. (Click to see the sample
+    project here)</p>
+</li>
+<li>
+<p>Copy the .jar
+    file <code class="codehilite">org.wso2.custom.authenticator.local-1.0.0.jar</code> inside <code class="codehilite">&lt;IS_HOME&gt;/repository/components/dropins</code> folder. </p>
+</li>
+<li>
+<p>Start the server.</p>
+</li>
+<li>
+<p>Log into Admin Console.</p>
+</li>
+<li>
+<p>Create a new user (ex: ‘Alice’).</p>
+</li>
+<li>
+<p>Create a new role (ex: photoSharingRole) and assign the user to it.</p>
+</li>
+<li>
+<p>Create a service provider for the application.<br />
+    (You must have the app deployed on the tomcat server.)</p>
+</li>
+<li>
+<p>In service provider configuration, under ‘Inbound Authentication
+    Configuration’/‘Oauth/OpenID Connect Configuration’,
+    click <strong>Configure</strong>.<br />
+<img alt="" src="attachments/92523651/92523652.png" />{width="700"}</p>
+</li>
+<li>
+<p>Provide the Callback URL and register it as a OAuth2 client app.</p>
+</li>
+<li>
+<p>Under ‘Local &amp; Outbound Authentication Configuration’, select ‘Local
+    authentication’ check box.</p>
+<p>On the corresponding drop down list, you can see, ‘BasicCustom’
+which is the display name of the custom authenticator that was
+written. From the above step, you can make sure your custom
+authenticator is there and ready for use.</p>
+</li>
+<li>
+<p>Visit the playground app and provide <strong>Client ID</strong> of the registered
+    playground app and give the <strong>Scope</strong> as ‘openid’ to make sure it is
+    in the OpenID Connect flow. Click <strong>Authorize</strong>.  </p>
+<p>Then you will be directed to WSO2 Identity Server login page.
+15. Provide the username and password of the user 'Alice' who is in the
+‘photoSharingRole’. You are prompted to approve the app and logged
+in.</p>
+</li>
+</ol>
+<p>The following is a set of methods related to writing a custom local
+authenticator.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>canHandle()</td>
+<td><p>This method checks whether the authentication request is valid, according to the custom authenticator’s requirements. The user will be authenticated if the method returns 'true'. This method also checks whether the authentication or logout request can be handled by the authenticator.</p>
+<p>For example, you can check if the username and password is 'not null' in the <strong>canHandle</strong> method. if that succeeds, the authentication flow will continue (to have the user authenticated).</p></td>
+</tr>
+<tr class="even">
+<td>process()</td>
+<td><p>This method is used to process or carry out the user authentication process. It calls the super.process(), so that the super class will handle the authentication process, and it calls processAuthenticationResponse() method in the custom authenticator class to execute the custom authentication logic.</p></td>
+</tr>
+<tr class="odd">
+<td>processAuthenticationResponse()</td>
+<td><p>Implementation of custom authentication logic happens inside this method. For example, you can call any API that can do authentication and authenticate the user or you can authenticate the user against the underlying user store. Then you can also do any other custom logic after authenticating the user.</p>
+<p>For example, you can check if a user belongs to a particular role and allow authentication accordingly.</p></td>
+</tr>
+<tr class="even">
+<td>initiateAuthenticationrequest()</td>
+<td><p>This method is used to redirect the user to the login page in order to authenticate. You can redirect the user to a custom login URL using this method or you can use default WSO2 Identity Server login page.</p></td>
+</tr>
+<tr class="odd">
+<td>retryAuthenticationEnabled()</td>
+<td><p>This method returns a boolean value. If the authentication fails due to some issue like invalid credentials, this method will be called to know whether to retry the authentication flow. If this method returns 'true', the authentication flow will be retried. If returns 'false', the flow is stopped with an exception thrown.</p>
+<p>You need to override this method if you are calling the super.process() method. But if you are writing your own process() method, you can handle all the retrying logic accordingly within the method.</p></td>
+</tr>
+<tr class="even">
+<td>getContextIdentifier()</td>
+<td><p>This method gets the Context identifier sent with the request. This identifier is used to retrieve the state of the authentication/logout flow.</p></td>
+</tr>
+<tr class="odd">
+<td>getFriendlyName()</td>
+<td><p>This method returns the name you want to display for your custom authenticator. This name will be displayed in the local authenticators drop down.</p></td>
+</tr>
+<tr class="even">
+<td>getname()</td>
+<td><p>This method is used to get the name of the authenticator.</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="attachments">Attachments:</h2>
+<p><img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"} <a href="attachments/92523651/92523652.png">Service
+Provider Click Configure.png</a>
+(image/png)  </p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Writing_a_Custom_Federated_Authenticator/" title="Writing a Custom Federated Authenticator" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Writing a Custom Federated Authenticator
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../../Getting_Started/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Introduction
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

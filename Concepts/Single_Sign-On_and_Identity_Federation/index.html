@@ -1,0 +1,1996 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Single Sign-On and Identity Federation - WSO2 Identity Server Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546e7a">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700|Courier+New">
+        <style>body,input{font-family:"Nunito Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier New","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#single-sign-on-and-identity-federation" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="WSO2 Identity Server Documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../images/WSO2_Software_Logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                WSO2 Identity Server Documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Single Sign-On and Identity Federation
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/sherenewso2/mkdocs-base/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      View on Github
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../GettingStarted/Overview/" title="Getting Started" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" title="Concepts" class="md-tabs__link md-tabs__link--active">
+          Concepts
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Troubleshooting/" title="How Tos" class="md-tabs__link">
+          How Tos
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Develop/user_mgt/Writing_a_Custom_Password_Validator/" title="Develop" class="md-tabs__link">
+          Develop
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Getting_Started/" title="Admin" class="md-tabs__link">
+          Admin
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Getting_Started/" title="Deploy" class="md-tabs__link">
+          Deploy
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Getting_Started/" title="Troubleshooting" class="md-tabs__link">
+          Troubleshooting
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Getting_Started/" title="References" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Getting_Started/" title="Community" class="md-tabs__link">
+          Community
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!-- Main navigation -->
+<nav class="md-nav md-nav--primary" data-md-level="0">
+
+    <!-- Site title -->
+    <label class="md-nav__title md-nav__title--site" for="__drawer">
+        <a href="../.."
+           title="WSO2 Identity Server Documentation" class="md-nav__button md-logo">
+            
+            <img src="../../images/WSO2_Software_Logo.png" width="48" height="48" />
+            
+        </a>
+        WSO2 Identity Server Documentation
+        <label for="Versions">Ver:
+            <select id="versions" onchange="window.location.href=this.value;" style="
+		position: inherit;
+		display: inline;
+		min-width: 25%;
+		/* width: 120%; */
+		height: 25px;
+		padding: 5px 15px 5px 5px;
+		color: Black;
+		border: none;
+		background: transparent;
+		outline: none;
+		-webkit-appearance: none;
+		z-index: 99;
+		cursor: pointer;
+		font-size: 12px;
+		margin-bottom: 10px;
+		border: 1px solid black;
+		overflow: auto
+	">
+                <option value="" selected="selected">Versions</option>
+ 		<option value="https://Kanapriya.github.io/mkdocs-base-1/versions/IS/IS530/5.3.0/">5.3.0</option>
+                <option value="https://Kanapriya.github.io/mkdocs-base-1/versions/IS/IS540/5.4.0/">5.4.0</option>
+                <option value="https://Kanapriya.github.io/mkdocs-base-1/versions/IS/IS550/5.5.0/">5.5.0</option>
+            </select>
+        </label>
+    </label>
+    <!-- Repository containing source -->
+    
+    <div class="md-nav__source">
+        
+
+
+  
+
+
+  <a href="https://github.com/sherenewso2/mkdocs-base/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      View on Github
+    </div>
+  </a>
+
+    </div>
+    
+
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Getting Started
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GettingStarted/Overview/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GettingStarted/About_this_Release/" title="About this release" class="md-nav__link">
+      About this release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GettingStarted/QSG/" title="Quick Start" class="md-nav__link">
+      Quick Start
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Concepts
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Single Sign-On and Identity Federation
+      </label>
+    
+    <a href="./" title="Single Sign-On and Identity Federation" class="md-nav__link md-nav__link--active">
+      Single Sign-On and Identity Federation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-single-sign-on" title="Introducing single sign-on" class="md-nav__link">
+    Introducing single sign-on
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-single-sign-on-works" title="How single sign-on works" class="md-nav__link">
+    How single sign-on works
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sso-in-reality" title="SSO in reality" class="md-nav__link">
+    SSO in reality
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-protocols-for-sso" title="Supported protocols for SSO" class="md-nav__link">
+    Supported protocols for SSO
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saml-20-sso" title="SAML 2.0 SSO" class="md-nav__link">
+    SAML 2.0 SSO
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saml-20-web-browser-based-sso-profile" title="SAML 2.0 web browser-based SSO profile" class="md-nav__link">
+    SAML 2.0 web browser-based SSO profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saml-20-sso-assertion-consumers" title="SAML 2.0 SSO assertion consumers" class="md-nav__link">
+    SAML 2.0 SSO assertion consumers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authnrequest-message" title="&lt;AuthnRequest&gt; message" class="md-nav__link">
+    &lt;AuthnRequest&gt; message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response-message" title="&lt;Response&gt; message" class="md-nav__link">
+    &lt;Response&gt; message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-provider-initiated-sso" title="Identity provider initiated SSO" class="md-nav__link">
+    Identity provider initiated SSO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ws-federation" title="WS-Federation" class="md-nav__link">
+    WS-Federation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openid-connect" title="OpenID Connect" class="md-nav__link">
+    OpenID Connect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ws-trust" title="WS-Trust" class="md-nav__link">
+    WS-Trust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity-federation-and-a-comparison-with-sso" title="Identity federation and a comparison with SSO" class="md-nav__link">
+    Identity federation and a comparison with SSO
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attachments" title="Attachments:" class="md-nav__link">
+    Attachments:
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Identity_Provisioning_and_its_Standards/" title="Identity_Provisioning and its Standards" class="md-nav__link">
+      Identity_Provisioning and its Standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Access_Control_and_Entitlement_Management/" title="Access_Control and Entitlement Management" class="md-nav__link">
+      Access_Control and Entitlement Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Identity_Anti-patterns_and_the_Identity_Bus/" title="Identity Anti-patterns and the Identity Bus" class="md-nav__link">
+      Identity Anti-patterns and the Identity Bus
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How Tos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How Tos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Troubleshooting/" title="Troubleshooting Guide" class="md-nav__link">
+      Troubleshooting Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Best Practices Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Best Practices Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../BestPracticesGuide/" title="Best Practices Guide" class="md-nav__link">
+      Best Practices Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Developer_Guide/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Developer Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Developer Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3-1" type="checkbox" id="nav-3-3-1">
+    
+    <label class="md-nav__link" for="nav-3-3-1">
+      Testing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-3-1">
+        Testing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../WUM_Commands_Guide/" title="WUM Commands Guide" class="md-nav__link">
+      WUM Commands Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3-2" type="checkbox" id="nav-3-3-2">
+    
+    <label class="md-nav__link" for="nav-3-3-2">
+      Another subpage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-3-2">
+        Another subpage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Developer_Guide/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Develop
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Develop
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      User Management for Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        User Management for Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/user_mgt/Writing_a_Custom_Password_Validator/" title="Writing a Custom Password Validator" class="md-nav__link">
+      Writing a Custom Password Validator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/user_mgt/Writing_a_Custom_Claim_Handler/" title="Writing a Custom Claim Handler" class="md-nav__link">
+      Writing a Custom Claim Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/user_mgt/User_Store_Listeners/" title="User Store Listeners" class="md-nav__link">
+      User Store Listeners
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/user_mgt/Using_the_User_Management_Errors_Event_Listener/" title="Using the User Management Errors Event Listener" class="md-nav__link">
+      Using the User Management Errors Event Listener
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/user_mgt/Carbon_Remote_User_Store_Manager/" title="Carbon Remote User Store Manager" class="md-nav__link">
+      Carbon Remote User Store Manager
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Provisioning for Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Provisioning for Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/provision/Writing_an_Outbound_Provisioning_Connector/" title="Writing an Outbound Provisioning Connector" class="md-nav__link">
+      Writing an Outbound Provisioning Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/provision/Extensible_SCIM_User_Schemas_With_WSO2_Identity_Server/" title="Extensible SCIM User Schemas With WSO2 Identity Server" class="md-nav__link">
+      Extensible SCIM User Schemas With WSO2 Identity Server
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Identity Federation for Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Identity Federation for Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/federate/Writing_a_Custom_Federated_Authenticator/" title="Writing a Custom Federated Authenticator" class="md-nav__link">
+      Writing a Custom Federated Authenticator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Develop/federate/Writing_a_Custom_Local_Authenticator/" title="Writing a Custom Local Authenticator" class="md-nav__link">
+      Writing a Custom Local Authenticator
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Admin
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Admin
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Deploy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Deploy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Troubleshooting
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Troubleshooting
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      References
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Community
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Community
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Getting_Started/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Using_WSO2_In-Place_Updates/" title="Using WSO2 In-Place Updates" class="md-nav__link">
+      Using WSO2 In-Place Updates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-single-sign-on" title="Introducing single sign-on" class="md-nav__link">
+    Introducing single sign-on
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-single-sign-on-works" title="How single sign-on works" class="md-nav__link">
+    How single sign-on works
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sso-in-reality" title="SSO in reality" class="md-nav__link">
+    SSO in reality
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-protocols-for-sso" title="Supported protocols for SSO" class="md-nav__link">
+    Supported protocols for SSO
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saml-20-sso" title="SAML 2.0 SSO" class="md-nav__link">
+    SAML 2.0 SSO
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saml-20-web-browser-based-sso-profile" title="SAML 2.0 web browser-based SSO profile" class="md-nav__link">
+    SAML 2.0 web browser-based SSO profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saml-20-sso-assertion-consumers" title="SAML 2.0 SSO assertion consumers" class="md-nav__link">
+    SAML 2.0 SSO assertion consumers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authnrequest-message" title="&lt;AuthnRequest&gt; message" class="md-nav__link">
+    &lt;AuthnRequest&gt; message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response-message" title="&lt;Response&gt; message" class="md-nav__link">
+    &lt;Response&gt; message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-provider-initiated-sso" title="Identity provider initiated SSO" class="md-nav__link">
+    Identity provider initiated SSO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ws-federation" title="WS-Federation" class="md-nav__link">
+    WS-Federation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openid-connect" title="OpenID Connect" class="md-nav__link">
+    OpenID Connect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ws-trust" title="WS-Trust" class="md-nav__link">
+    WS-Trust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity-federation-and-a-comparison-with-sso" title="Identity federation and a comparison with SSO" class="md-nav__link">
+    Identity federation and a comparison with SSO
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attachments" title="Attachments:" class="md-nav__link">
+    Attachments:
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sherenewso2/mkdocs-base/edit/master/docs/Concepts/Single_Sign-On_and_Identity_Federation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="single-sign-on-and-identity-federation">Single Sign-On and Identity Federation</h1>
+<p>This section includes the following key concepts that are pertaining to
+Single Sign-On (SSO) and identity federation in WSO2 Identity Server.</p>
+<hr />
+<p><a href="#SingleSign-OnandIdentityFederation-Introducingsinglesign-on">Introducing single
+sign-on</a>
+| <a href="#SingleSign-OnandIdentityFederation-Howsinglesign-onworks">How single sign-on
+works</a> |
+<a href="#SingleSign-OnandIdentityFederation-SSOinreality">SSO in reality</a> |
+<a href="#SingleSign-OnandIdentityFederation-SupportedprotocolsforSSO">Supported protocols for
+SSO</a> |
+<a href="#SingleSign-OnandIdentityFederation-SAML2.0SSO">SAML 2.0 SSO</a> |
+<a href="#SingleSign-OnandIdentityFederation-WS-Federation">WS-Federation</a> |
+<a href="#SingleSign-OnandIdentityFederation-OpenIDConnect">OpenID Connect</a> |
+<a href="#SingleSign-OnandIdentityFederation-WS-Trust">WS-Trust</a> | <a href="#SingleSign-OnandIdentityFederation-IdentityfederationandacomparisonwithSSO">Identity
+federation and a comparison with
+SSO</a></p>
+<hr />
+<h3 id="introducing-single-sign-on">Introducing single sign-on</h3>
+<p>Single sign-on (SSO) is one of the key features of the WSO2 Identity
+Server that enables users to provide their credentials once and obtain
+access to multiple applications. The users are not prompted for their
+credentials when accessing each application until their session is
+terminated. Additionally, the user can access all these applications
+without having to log into each and every one of them individually. So,
+if users log into application A, for example, they would automatically
+have access to application B as well for the duration of that session
+without having to re-enter their credentials.</p>
+<p>The following are some of the advantages you can have with SSO:</p>
+<ul>
+<li>Users need only a single username/password pair to access multiple
+    services. Thus they do not have the issue of remembering multiple
+    username/password pairs.</li>
+<li>Users are authenticated only once at the identity provider and then
+    they are automatically logged into all services within that
+    "trust-domain". This process is more convenient to users since they
+    do not have to provide their username/password at every service
+    provider.</li>
+<li>Service providers do not have the overhead of managing user
+    identities, which is more convenient for them.</li>
+<li>User identities are managed at a central point. This is more secure,
+    less complex and easily manageable.</li>
+</ul>
+<hr />
+<h3 id="how-single-sign-on-works">How single sign-on works</h3>
+<p>To understand how single sign-on works, it is useful to first examine
+how authentication works in a non SSO environment. The following diagram
+depicts this flow.</p>
+<p><img alt="" src="attachments/92522895/92522898.png" /></p>
+<p><em><strong>Figure</strong>: Authentication in a non SSO environment</em></p>
+<p>In the above figure, the users access <strong>Application 1</strong> first and
+then <strong>Application 2</strong> using the same browser. The user is authenticated
+in <strong>Application 1</strong> first and can access this application. When the
+users attempt to access <strong>Application 2</strong>, they must enter their
+credentials again and get access to <strong>Application 2</strong> separately. There
+is no way for <strong>Application 2</strong> to access the cookie stored in the
+browser for <strong>Application 1</strong> and authenticate the user by that means.</p>
+<p>The following diagram depicts how this story differs in a SSO
+environment.</p>
+<p><img alt="" src="attachments/92522895/92522897.png" /></p>
+<p><em><strong>Figure</strong>: Authentication in a SSO environment</em></p>
+<p>In this second figure, the users access <strong>Application 1</strong> first followed
+by <strong>Application 2</strong>. Once again, the users use the same browser to
+access these applications. The users are redirected to the WSO2 Identity
+Server (or any authentication server that is configured for this task).
+If the users are already logged in to the Identity Server, the user is
+authenticated in <strong>Application 1</strong> via an authentication token sent by
+the Identity Server to <strong>Application 1</strong>. When <strong>Application 2</strong> is
+accessed, the same thing happens and the users are redirected to the
+Identity Server and authenticated. This is how SSO works.</p>
+<hr />
+<h3 id="sso-in-reality">SSO in reality</h3>
+<p>Single sign-on is widely used in web technologies. Google is one of the
+best examples. Try this simple exercise.</p>
+<ol>
+<li>Visit <a href="http://www.google.com/">www.google.com</a> from your web
+    browser.</li>
+<li>Click the <strong>SIGN IN</strong> button on the top right of the page.</li>
+<li>Once you sign in, you are redirected
+    to <a href="https://accounts.google.com/ServiceLogin">https://accounts.google.com/ServiceLogin</a>. There you are
+    requested to enter your Username and Password. Enter your Google
+    credentials there.</li>
+<li>Once you enter your Username and Password, you are directed back
+    to <a href="http://www.google.com/">www.google.com</a> where you started.</li>
+<li>Next visit <a href="http://www.gmail.com/">www.gmail.com</a>, the Google mail
+    server.</li>
+<li>Notice that you are automatically signed in and you directly access
+    your Gmail Inbox. You did not have to enter your Username and
+    Password at Gmail.</li>
+<li>In addition to that; now
+    try <a href="http://www.youtube.com/">www.youtube.com</a>.</li>
+<li>
+<p>You are automatically signed in. You do not have to enter your
+    username and password at YouTube.</p>
+<p><strong>Tip</strong>: Notice the URL of the web browser. Each time you access an
+application, you see that you are being redirected
+to <a href="https://accounts.google.com/ServiceLogin">https://accounts.google.com/ServiceLogin</a> and return immediately
+back to the website.</p>
+</li>
+</ol>
+<p>Single Sign-On (SSO) allows you to sign in only once but provides access
+to multiple resources without having to re-enter your username and
+password.</p>
+<hr />
+<h3 id="supported-protocols-for-sso">Supported protocols for SSO</h3>
+<p>The following are the supported protocols for agent-based single
+sign-on.</p>
+<ul>
+<li>SAML 2.0</li>
+<li>WS-Federation</li>
+<li>OpenID Connect</li>
+<li>WS-Trust</li>
+</ul>
+<p>The following sections in this topic expand on these protocols and
+provide details pertaining to them.</p>
+<hr />
+<h3 id="saml-20-sso">SAML 2.0 SSO</h3>
+<p>SAML stands for Security Assertion Markup Language, which is an
+XML-based data format for exchanging authentication and authorization
+data between an identity provider and a service provider. The single
+most important requirement that SAML addresses is web browser single
+sign-on (SSO). Three main roles are defined in SAML Specification.</p>
+<ul>
+<li><strong>The Principal</strong>: This is typically the user who requires a service
+    from a service provider entity.</li>
+<li><strong>The Identity Provider</strong>: The SAML authority that provides the
+    identity assertion to authenticate a principal.</li>
+<li><strong>The Service Provider</strong>: The SAML consumer that provides the
+    service for principals.</li>
+</ul>
+<p>The main use case scenario covered by SAML is the principal (the user)
+requesting access to a resource or service from the service provider.
+Then the service provider, using SAML, communicates with the identity
+provider to obtain identity assertion. The service provider makes the
+access control decision, depending on this assertion.</p>
+<p>SAML 2.0 is the latest version of SAML, which uses security tokens
+containing assertions to pass information about a user between an
+identity provider and a service provider.</p>
+<p>SAML 2.0 provides five main specifications:</p>
+<ul>
+<li>Core</li>
+<li>Bindings</li>
+<li>Profiles</li>
+<li>Metadata</li>
+<li>Conformances</li>
+</ul>
+<h4 id="saml-20-web-browser-based-sso-profile">SAML 2.0 web browser-based SSO profile</h4>
+<p>SAML 2.0 Web Browser based SSO profile is defined under the SAML 2.0
+Profiles specification.</p>
+<p>In a web browser based SSO system, the flow can be started by the user
+either by attempting to access a service at the service provider or by
+directly accessing the identity provider itself.</p>
+<p><strong>If the user accesses a service at a service provider:</strong></p>
+<ol>
+<li>The service provider determines which identity provider to use (this
+    is the case when there are multiple identity providers. SAML
+    identity provider discovery profile may be used).</li>
+<li>The service provider generates a SAML message and then redirects the
+    web browser to the identity provider along with the message.</li>
+<li>Identity provider authenticates the user.</li>
+<li>The identity provider generates a SAML message and then redirects
+    the web browser back to the service provider.</li>
+<li>The service provider processes the SAML message and decides to grant
+    or deny access to the user.</li>
+</ol>
+<p>If the user accesses the identity provider directly, then only the steps
+3, 4 and 5 are in the flow.</p>
+<p>The following diagram depicts this flow.</p>
+<p><img alt="" src="attachments/92522895/92522896.png" /></p>
+<p><em><strong>Figure</strong>: SAML 2.0 authentication flow</em></p>
+<p>The message MUST contain an element that uniquely identifies the service
+provider who created the message. Optionally, the message may contain
+elements such as Issuer, NameIDPolicy, etc. More information regarding
+the message can be found in <a href="http://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf">SAML Core
+Specification</a>.</p>
+<p><img alt="" src="images/icons/grey_arrow_down.png" />{.expand-control-image}Click here
+for more information on assertion consumers, the authentication request
+and response.</p>
+<h4 id="saml-20-sso-assertion-consumers">SAML 2.0 SSO assertion consumers</h4>
+<p>Service providers act as SAML assertion consumers. They have two basic
+functions:</p>
+<ul>
+<li>Create messages and redirect users to the identity provider with the
+    created message.</li>
+<li>Process messages from the identity provider and make decisions based
+    on them.</li>
+</ul>
+<p>The following code is a sketch of a sample service provider servlet in a
+SAML 2.0 web browser-based SSO system.</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Resource</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> 
+<span class="o">{</span>             
+     <span class="kd">private</span> <span class="kd">static</span> <span class="n">SamlConsumer</span> <span class="n">consumer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SamlConsumer</span><span class="o">();</span>           
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> 
+     <span class="o">{</span> 
+             <span class="n">requestMessage</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="na">buildRequestMessage</span><span class="o">();</span>
+             <span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="n">requestMessage</span><span class="o">);</span>
+     <span class="o">}</span>            
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doPost</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> 
+     <span class="o">{</span> 
+             <span class="n">responseMessage</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">&quot;SAMLResponse&quot;</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>  
+             <span class="n">result</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="na">processResponseMessage</span><span class="o">(</span><span class="n">responseMessage</span><span class="o">);</span>
+     <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>When a web user attempts to access the above servlet,
+its <code class="codehilite">doGet()</code> method is called. Inside the <code class="codehilite">doGet()</code> method, it
+generates an message and then redirects the user to the identity
+provider.</p>
+<p>After authentication is completed by the identity provider, it does a
+<code class="codehilite">POST</code> callback to the above servlet with a message. Then
+the <code class="codehilite">doPost()</code> method of the servlet gets called and inside
+the <code class="codehilite">doPost()</code> method, it retrieves the message from the request and
+then the message is passed to the <code class="codehilite">SamlConsumer</code> instance for
+processing.</p>
+<h4 id="authnrequest-message">&lt;AuthnRequest&gt; message</h4>
+<p>To create an <code class="codehilite">&lt;AuthnRequest&gt;</code> message using the OpenSAML library, do the
+following.</p>
+<ol>
+<li>Add the OpenSAML library to the build path of the project. You can
+    download the OpenSAML .jar file
+    from <a href="http://code.google.com/p/saml2-consumer-module/downloads/detail?name=opensaml2-2.0.0.alpha1-wso2v1.jar">here</a>.</li>
+<li>A sample <code class="codehilite">&lt;AuthnRequest&gt;</code> message can be
+    found <a href="http://wso2.org/files/AuthRequest.xml">here</a>.</li>
+<li>
+<p>According to SAML 2.0 specifications, the message must contain an
+    element. Create the <code class="codehilite">Issuer</code> element first.</p>
+<div class="codehilite"><pre><span></span><span class="n">String</span> <span class="n">issuerId</span> <span class="o">=</span> <span class="s">&quot;saml2.sso.demo&quot;</span><span class="o">;</span>
+<span class="n">IssuerBuilder</span> <span class="n">issuerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IssuerBuilder</span><span class="o">();</span>
+<span class="n">Issuer</span> <span class="n">issuer</span> <span class="o">=</span> <span class="n">issuerBuilder</span><span class="o">.</span><span class="na">buildObject</span><span class="o">(</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span><span class="o">,</span> <span class="s">&quot;Issuer&quot;</span><span class="o">,</span> <span class="s">&quot;samlp&quot;</span><span class="o">);</span>
+<span class="n">issuer</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">issuerId</span><span class="o">);</span>
+</pre></div>
+
+</li>
+<li>
+<p>Create the <code class="codehilite">&lt;AuthnRequest&gt;</code> next.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// the issuerUrl is the url of the service provider who generates the  message</span>
+<span class="n">String</span> <span class="n">issuerUrl</span> <span class="o">=</span> <span class="s">&quot;http://localhost:8080/saml2.sso.demo/consumer&quot;</span><span class="o">;</span>
+<span class="n">DateTime</span> <span class="n">issueInstant</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DateTime</span><span class="o">();</span>
+<span class="n">AuthnRequestBuilder</span> <span class="n">authnRequestBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AuthnRequestBuilder</span><span class="o">();</span>
+<span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">authnRequestBuilder</span><span class="o">.</span><span class="na">buildObject</span><span class="o">(</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;</span><span class="o">,</span> <span class="s">&quot;AuthnRequest&quot;</span><span class="o">,</span> <span class="s">&quot;samlp&quot;</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setForceAuthn</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIsPassive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="n">issueInstant</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setProtocolBinding</span><span class="o">(</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST&quot;</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setAssertionConsumerServiceURL</span><span class="o">(</span><span class="n">issuerUrl</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssuer</span><span class="o">(</span><span class="n">issuer</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setID</span><span class="o">(</span><span class="n">aRandomId</span><span class="o">);</span>
+<span class="n">authnRequest</span><span class="o">.</span><span class="na">setVersion</span><span class="o">(</span><span class="n">SAMLVersion</span><span class="o">.</span><span class="na">VERSION_20</span><span class="o">);</span> 
+</pre></div>
+
+<p>The message may contain many other elements like "," etc. those
+elements can be created and added to the message in the same way.</p>
+</li>
+<li>
+<p>Next encode the message.</p>
+<div class="codehilite"><pre><span></span><span class="n">Marshaller</span> <span class="n">marshaller</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+<span class="n">Element</span> <span class="n">authDOM</span> <span class="o">=</span> <span class="n">marshaller</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+
+<span class="n">StringWriter</span> <span class="n">rspWrt</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringWriter</span><span class="o">();</span>
+<span class="n">XMLHelper</span><span class="o">.</span><span class="na">writeNode</span><span class="o">(</span><span class="n">authDOM</span><span class="o">,</span> <span class="n">rspWrt</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">requestMessage</span> <span class="o">=</span> <span class="n">rspWrt</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+         
+<span class="n">Deflater</span> <span class="n">deflater</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Deflater</span><span class="o">(</span><span class="n">Deflater</span><span class="o">.</span><span class="na">DEFLATED</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="n">ByteArrayOutputStream</span> <span class="n">byteArrayOutputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+<span class="n">DeflaterOutputStream</span> <span class="n">deflaterOutputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DeflaterOutputStream</span><span class="o">(</span><span class="n">byteArrayOutputStream</span><span class="o">,</span> <span class="n">deflater</span><span class="o">);</span>
+<span class="n">deflaterOutputStream</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">requestMessage</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+<span class="n">deflaterOutputStream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+         
+<span class="cm">/* Encoding the compressed message */</span>
+<span class="n">String</span> <span class="n">encodedRequestMessage</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">encodeBytes</span><span class="o">(</span><span class="n">byteArrayOutputStream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">(),</span> <span class="n">Base64</span><span class="o">.</span><span class="na">DONT_BREAK_LINES</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">encodedAuthnRequest</span> <span class="o">=</span> <span class="n">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">encodedRequestMessage</span><span class="o">,</span><span class="s">&quot;UTF-8&quot;</span><span class="o">).</span><span class="na">trim</span><span class="o">();</span>
+</pre></div>
+
+</li>
+<li>
+<p>Construct the redirection URL.</p>
+<div class="codehilite"><pre><span></span><span class="n">redirectionUrl</span> <span class="o">=</span> <span class="n">identitypProviderUrl</span><span class="o">+</span> <span class="s">&quot;?SAMLRequest=&quot;</span> <span class="o">+</span> <span class="n">encodedRequestMessage</span><span class="o">;</span>
+</pre></div>
+
+</li>
+<li>
+<p>Redirect the user to the identity provider.</p>
+<div class="codehilite"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="n">redirectionUrl</span><span class="o">);</span>
+</pre></div>
+
+</li>
+</ol>
+<h4 id="response-message">&lt;Response&gt; message</h4>
+<p>The Identity provider must use HTTP POST or artifact binding to transfer
+the <code class="codehilite">&lt;SAMLResponse&gt;</code> message to the service provider. To read
+the <code class="codehilite">&lt;Response&gt;</code> message issued by the WSO2 Identity Server, do the
+following:</p>
+<ol>
+<li>A sample &lt;<code class="codehilite">Response</code>&gt; message can be
+    found <a href="http://wso2.org/files/Response.xml">here</a>.</li>
+<li>
+<p>The response message must be fetched from the request.</p>
+<div class="codehilite"><pre><span></span><span class="n">responseMessage</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">&quot;SAMLResponse&quot;</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
+</pre></div>
+
+</li>
+<li>
+<p>The fetched <code class="codehilite">responseMessage</code> is unmarshaled and the SAML message is
+    retrieved.</p>
+<div class="codehilite"><pre><span></span><span class="n">DocumentBuilderFactory</span> <span class="n">documentBuilderFactory</span> <span class="o">=</span> <span class="n">DocumentBuilderFactory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+<span class="n">documentBuilderFactory</span><span class="o">.</span><span class="na">setNamespaceAware</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DocumentBuilder</span> <span class="n">docBuilder</span> <span class="o">=</span> <span class="n">documentBuilderFactory</span><span class="o">.</span><span class="na">newDocumentBuilder</span><span class="o">();</span>
+ 
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">base64DecodedResponse</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">responseMessage</span><span class="o">);</span>
+<span class="n">ByteArrayInputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">base64DecodedResponse</span><span class="o">);</span>
+<span class="n">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="n">docBuilder</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+<span class="n">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">getDocumentElement</span><span class="o">();</span>
+<span class="n">UnmarshallerFactory</span> <span class="n">unmarshallerFactory</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">getUnmarshallerFactory</span><span class="o">();</span>
+<span class="n">Unmarshaller</span> <span class="n">unmarshaller</span> <span class="o">=</span> <span class="n">unmarshallerFactory</span><span class="o">.</span><span class="na">getUnmarshaller</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="o">(</span><span class="n">Response</span><span class="o">)</span> <span class="n">unmarshaller</span><span class="o">.</span><span class="na">unmarshall</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+</pre></div>
+
+</li>
+<li>
+<p>The retrieved SAML 2.0 response message can be easily processed. For
+    example, let's take the username or the subject's <code class="codehilite">NameID</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">String</span> <span class="n">subject</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getAssertions</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getSubject</span><span class="o">()</span> <span class="o">.</span><span class="na">getNameID</span><span class="o">().</span><span class="na">getValue</span><span class="o">();</span>
+</pre></div>
+
+</li>
+<li>
+<p>Alternatively, if the response is signed by the identity
+    provider, you can retrieve the certificate.</p>
+<div class="codehilite"><pre><span></span><span class="n">String</span> <span class="n">certificate</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getKeyInfo</span><span class="o">().</span><span class="na">getX509Datas</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getX509Certificates</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getValue</span><span class="o">();</span>
+</pre></div>
+
+</li>
+</ol>
+<h4 id="identity-provider-initiated-sso">Identity provider initiated SSO</h4>
+<p>To initiate IdP Initiated SSO you need to perform a HTTP GET/POST to the
+following URL (assume the registered service provider issuer ID is
+<a href="http://foo.com">foo.com</a>). The SAML protocol message can be encoded
+using Base64 encoding.</p>
+<p><a href="https://localhost:9443/samlsso?spEntityID=foo.com">https://localhost:9443/samlsso?spEntityID=foo.com</a></p>
+<p>This request will authenticate and redirect the user to the registered
+Assertion Consumer URL. Optionally, you can send in a <code class="codehilite">RelayState</code>
+parameter as follows:</p>
+<p><a href="https://localhost:9443/samlsso?spEntityID=foo.com&amp;RelayState=http://localhost:8080/foo.com/my-home.jsp">https://localhost:9443/samlsso?spEntityID=foo.com&amp;RelayState=http://localhost:8080/foo.com/my-home.jsp</a></p>
+<p>The <code class="codehilite">RelayState</code> parameter must be URL encoded. This request will
+authenticate and redirect the user to the URL in the RelayState
+parameter itself.</p>
+<p>Either you could have service provider initiated SSO only, or service
+provider initiated SSO and identity provider initiated SSO. You cannot
+have only identity provider initiated SSO. By design, service provider
+initiated SSO is more restrictive and secure. If a service provider is
+allowed to do identity provider initiated SSO, it would automatically
+imply that this service provider is allowed to do service provider
+initiated SSO as well.</p>
+<p><strong>Recommended reading</strong></p>
+<p>See <a href="https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">SAML 2.0 specification
+documentation</a>
+for more information.</p>
+<hr />
+<h3 id="ws-federation">WS-Federation</h3>
+<p>WS-Federation (Web Services Federation) describes the management and
+brokering of trust relationships and security token exchange across Web
+services and organizational boundaries. WS-Federation is a part of the
+larger WS-Security framework. For example, WS-Federation builds on the
+Security Token Service (STS) by providing mechanisms that facilitate
+interactions. In the WS-Federation Model, an Identity Provider is a
+Security Token Service (STS).</p>
+<p><strong>Recommended reading</strong></p>
+<p>See <a href="http://docs.oasis-open.org/wsfed/federation/v1.2/ws-federation.html">WS-Federation specification
+documentation</a>
+for more information.</p>
+<hr />
+<h3 id="openid-connect">OpenID Connect</h3>
+<p>OpenID Connect is a simple identity layer on top of the OAuth 2.0
+protocol. It allows Clients to verify the identity of the End-User based
+on the authentication performed by an Authorization Server, as well as
+to obtain basic profile information about the End-User in an
+interoperable and REST-like manner.</p>
+<p>OpenID Connect allows clients of all types, including Web-based, mobile,
+and JavaScript clients, to request and receive information about
+authenticated sessions and end-users. The specification suite is
+extensible, allowing participants to use optional features such as
+encryption of identity data, discovery of OpenID Providers, and session
+management, when it makes sense for them.</p>
+<p><strong>Recommended reading</strong></p>
+<p>See <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect specification
+documentation</a> for
+more information. </p>
+<hr />
+<h3 id="ws-trust">WS-Trust</h3>
+<p>The "Security Token Service" (STS) component of WSO2 Identity Server
+enables you to configure the generic STS to issue claim-based security
+tokens. A claim-based security token is a common way for applications to
+acquire and authenticate the identity information they need about users
+inside their organization, in other organizations, and on the
+Internet. This Security Token Service is capable of issuing SAML 1.1 and
+SAML 2.0 tokens as recommended in WS-Trust and SAML Web Service Token
+Profile specifications.</p>
+<p>The WSDL of this service can be accessed by clicking this
+URL: <code class="codehilite">https://(hostname):(port)/services/wso2carbon-sts?wsdl</code>. For
+instance, with the default configuration, the URL
+is <code class="codehilite">https://localhost:9443/services/wso2carbon-sts?wsdl</code>.</p>
+<p>Both SAML 1.1 and SAML 2.0 token types are supported by default. The
+issued token type is decided based on the type of token defined in the
+RST (Request Security Token). Currently, the Bearer Subject Confirmation
+and Holder-Of-Key subject confirmation methods are both supported. With
+Holder-Of-Key, both Symmetric and Asymmetric key types are
+supported. You can obtain tokens containing claims that hold certain
+information about the subject. These claims can be extracted from the
+profiles or through custom claim callbacks which can be registered to
+the Carbon runtime.</p>
+<p><strong>Related Topics</strong></p>
+<ul>
+<li>See <a href="http://docs.oasis-open.org/ws-sx/ws-trust/v1.4/ws-trust.html">WS-Trust specification
+    documentation</a>
+    for more information.</li>
+<li>See <a href="https://docs.wso2.com/display/IS570/Configuring+WS-Trust+Security+Token+Service">Configuring WS-Trust Security Token
+    Service</a> to
+    configure WS-Trust in WSO2 Identity Server.</li>
+</ul>
+<hr />
+<h3 id="identity-federation-and-a-comparison-with-sso">Identity federation and a comparison with SSO</h3>
+<p>Identity and access management requirements are rapidly evolving over
+the years. Organizations cannot survive with authentication and
+authorization mechanisms that only span a single boundary of trust.
+Hence, these organizations often provide and consume services across
+trust boundaries, which may include partners, subsidiaries, customers or
+suppliers and may span across multiple buildings, cities, states,
+countries and even continents. Identity federation and Single Sign On
+(SSO) come into the picture to provide and consume these services across
+trust boundaries.</p>
+<p>Identity federation and SSO have similarities as well as key
+differences. Identity federation enables users to access multiple
+applications using the same access credentials. This makes access easy,
+as users do not have to remember a different set of credentials for
+every application they use. However, the users have to provide their
+credentials to each one of the applications separately although the
+credentials used are the same. On the other hand, SSO enables users to
+provide their credentials once and obtain access to multiple
+applications. In SSO, the users are not prompted for their credentials
+when accessing each application until their session is terminated.</p>
+<h2 id="attachments">Attachments:</h2>
+<p><img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"}
+<a href="attachments/92522895/92522896.png">image2017-6-15_23-10-49.png</a>
+(image/png)<br />
+<img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"}
+<a href="attachments/92522895/92522897.png">image2017-6-15_23-6-13.png</a>
+(image/png)<br />
+<img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"}
+<a href="attachments/92522895/92522898.png">image2017-6-15_23-2-15.png</a>
+(image/png)<br />
+<img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"} <a href="attachments/92522895/92522899.png">image2017-2-15
+15:58:36.png</a> (image/png)<br />
+<img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"} <a href="attachments/92522895/92522900.png">image2017-2-15
+16:41:33.png</a> (image/png)<br />
+<img alt="" src="images/icons/bullet_blue.gif" />{width="8" height="8"} <a href="attachments/92522895/92522901.png">image2017-2-15
+19:30:0.png</a> (image/png)  </p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../GettingStarted/QSG/" title="Quick Start" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Quick Start
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Identity_Provisioning_and_its_Standards/" title="Identity_Provisioning and its Standards" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Identity_Provisioning and its Standards
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
